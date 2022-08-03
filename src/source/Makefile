@@ -1,4 +1,4 @@
-INCLUDES=-I/usr/include/
+INCLUDES=-I../include -I/usr/include/
 LIB_DIRS=-L/usr/local/lib/
 LIBS=-lwiringPi -lpthread -lrt -lm -lcrypt
 CXX=g++
