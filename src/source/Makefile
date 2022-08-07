@@ -5,5 +5,5 @@ CXX=g++
 CXX_FLAGS=$(INCLUDES) $(LIB_DIRS) $(LIBS)
 NAME=phidippus_core
 
-all:main.cpp
-	$(CXX) main.cpp -o $(NAME) $(CXX_FLAGS)
+all:
+	$(CXX) main.cpp PCA9685.cpp -o $(NAME) $(CXX_FLAGS)

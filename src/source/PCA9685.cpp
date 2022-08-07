@@ -1,14 +1,16 @@
-#include <PCA9685.h>
+#include <PCA9685.hpp>
 #include <wiringPiI2C.h>
+#include <wiringPi.h>
+#include <unistd.h>
 
 PCA9685::PCA9685(int fd) : fd(fd)
 {
 	reset();
-	setPWMFreq(1000);
 }
 
-static void PCA9685::setupDevice(int address)
+int PCA9685::setupDevice(int address)
 {
+  wiringPiSetup();
 	return wiringPiI2CSetup(address);
 }
 
@@ -16,7 +18,7 @@ static void PCA9685::setupDevice(int address)
 void PCA9685::reset()
 {
 	wiringPiI2CWriteReg8(this->fd, MODE1, 0x00); //Normal mode
-	wiringPiI2CWriteReg8(this->fd, MODE2, 0x04); //totem pole
+	wiringPiI2CWriteReg8(this->fd, MODE2, 0x05); //totem pole
 }
 //! Set the frequency of PWM
 /*!
@@ -25,11 +27,15 @@ void PCA9685::reset()
 void PCA9685::setPWMFreq(int freq)
 {
 
-	uint8_t prescale_val = (CLOCK_FREQ / 4096 / freq) - 1;
+	int prescale_val = (CLOCK_FREQ / (4096 * freq)) - 1;
+  if (prescale_val > 255) prescale_val = 255;
+  if (prescale_val < 3) prescale_val = 3;
+
 	wiringPiI2CWriteReg8(this->fd, MODE1, 0x10);			 //sleep
 	wiringPiI2CWriteReg8(this->fd, PRE_SCALE, prescale_val); // multiplyer for PWM frequency
-	wiringPiI2CWriteReg8(this->fd, MODE1, 0x80);			 //restart
-	wiringPiI2CWriteReg8(this->fd, MODE2, 0x04);			 //totem pole (default)
+	wiringPiI2CWriteReg8(this->fd, MODE1, 0x00);			 //restart
+  usleep(500);
+	wiringPiI2CWriteReg8(this->fd, MODE2, 0x05);			 //totem pole (default)
 }
 
 //! PWM a single channel
