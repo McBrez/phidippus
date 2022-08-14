@@ -13,8 +13,19 @@ SOURCES=\
 
 OBJECTS=$(SOURCES:.cpp=.o)
 
+CP=cp
+RM=rm
+
 
 all:servo_tester
+
+.PHONY:install
+install:servo_tester
+	$(CP) -f servo_tester /usr/local/bin
+
+.PHONY:uninstall
+uninstall:
+	$(RM) /usr/local/bin/servo_tester
 
 servo_tester:$(OBJECTS)
 	$(CXX) -o servo_tester $(OBJECTS) $(CXX_FLAGS)

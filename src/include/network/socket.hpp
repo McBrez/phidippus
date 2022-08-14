@@ -1,0 +1,6 @@
+namespace network
+{
+    class Socket
+    {
+    };
+}
