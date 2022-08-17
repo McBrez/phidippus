@@ -13,10 +13,9 @@ namespace Kinematics
                                  linkTransMin(linkTransMin),
                                  linkTransMax(linkTransMax),
                                  currTrans(linkTransMax)
-    {
-    }
+    {}
 
-    Vector3f Link::getAngles() const { return this->currAngles; }
+    Vector3f Link::getAngles() const { return this->targetAngles; }
 
     Vector3f Link::getTrans() const { return this->currTrans; }
 

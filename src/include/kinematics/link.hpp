@@ -29,7 +29,7 @@ namespace Kinematics
     class Link
     {
         /// Has to have private access, to write the target angles.
-        friend Kinematics;
+        friend class Kinematics;
 
     public:
         /**

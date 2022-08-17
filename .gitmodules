@@ -1,3 +1,6 @@
 [submodule "src/3rd-party/eigen"]
 	path = src/3rd-party/eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "src/3rd-party/easyloggingpp"]
+	path = src/3rd-party/easyloggingpp
+	url = git@github.com:amrayn/easyloggingpp.git

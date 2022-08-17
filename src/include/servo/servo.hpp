@@ -5,6 +5,7 @@
 
 // Projeckt includes
 #include <PCA9685.hpp>
+#include <logger.hpp>
 
 namespace servo
 {
@@ -12,6 +13,7 @@ namespace servo
     {
     public:
         Servo(
+            std::shared_ptr<Logging::Logger> log,
             std::shared_ptr<PCA9685> i2c,
             int servoId,
             double minAngle,
@@ -30,5 +32,6 @@ namespace servo
         int currentPwmValue;
         int servoId;
         std::shared_ptr<PCA9685> i2cReference;
+        std::shared_ptr<Logging::Logger> log;
     };
 }

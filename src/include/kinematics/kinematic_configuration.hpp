@@ -5,11 +5,17 @@
 
 // Projects includes
 #include <link.hpp>
+#include <kinematics.hpp>
 
 namespace Kinematics
 {
+    class Link;
+    
     class KinematicConfiguration
     {
+    
+    friend class Kinematics;
+    
     public:
         KinematicConfiguration(std::vector<Link> links);
 
